@@ -4,9 +4,9 @@
     "es2022": true
   },
   "extends": [
-    "eslint:recommended",
     "plugin:prettier/recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "eslint-config-prettier"
   ],
   "plugins": ["react"],
   "overrides": [],
@@ -18,5 +18,8 @@
     "react": {
       "version": "detect"
     }
+  },
+  "rules": {
+    "react/prop-types": "off"
   }
 }
