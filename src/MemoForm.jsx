@@ -28,11 +28,10 @@ const MemoForm = ({ addMemo, selectedMemo, deleteMemo, editMemo }) => {
   };
 
   const handleDelete = () => {
-    if (selectedMemo) {
-      deleteMemo(selectedMemo.id);
-      setMemo("");
-      handleFormToggle();
-    }
+    if (!selectedMemo) return;
+    deleteMemo(selectedMemo.id);
+    setMemo("");
+    handleFormToggle();
   };
 
   const handleEdit = () => {
