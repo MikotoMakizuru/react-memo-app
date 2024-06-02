@@ -45,34 +45,36 @@ const MemoForm = ({ addMemo, selectedMemo, deleteMemo, editMemo }) => {
     <div>
       {isVisible ? (
         <form onSubmit={handleSubmit}>
-          <label>
-            <div>
+          <div>
+            <label>
+              メモ
+              <br />
               <textarea
                 value={memo}
                 onChange={(e) => setMemo(e.target.value)}
                 placeholder="メモを入力してください"
               />
-            </div>
-            <div>
-              {isEditing ? (
-                <>
-                  <button type="button" onClick={handleEdit}>
-                    編集
-                  </button>
-                  <button type="button" onClick={handleDelete}>
-                    削除
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button type="button" onClick={handleFormToggle}>
-                    キャンセル
-                  </button>
-                  <button type="submit">作成</button>
-                </>
-              )}
-            </div>
-          </label>
+            </label>
+          </div>
+          <div>
+            {isEditing ? (
+              <>
+                <button type="button" onClick={handleEdit}>
+                  編集
+                </button>
+                <button type="button" onClick={handleDelete}>
+                  削除
+                </button>
+              </>
+            ) : (
+              <>
+                <button type="button" onClick={handleFormToggle}>
+                  キャンセル
+                </button>
+                <button type="submit">作成</button>
+              </>
+            )}
+          </div>
         </form>
       ) : (
         <a href="#" onClick={handleFormToggle}>
