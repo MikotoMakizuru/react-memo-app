@@ -13,10 +13,14 @@ const MemoForm = ({ addMemo, selectedMemo, deleteMemo, editMemo }) => {
     }
   }, [selectedMemo]);
 
-  const handleFormToggle = () => {
-    setIsVisible((prevVisible) => !prevVisible);
+  const openForm = () => {
+    setIsVisible(true);
     setMemo("");
     setIsEditing(false);
+  };
+
+  const closeForm = () => {
+    setIsVisible(false);
   };
 
   const handleSubmit = (e) => {
@@ -24,21 +28,21 @@ const MemoForm = ({ addMemo, selectedMemo, deleteMemo, editMemo }) => {
     if (memo.trim() === "") return;
     addMemo(memo);
     setMemo("");
-    handleFormToggle();
+    closeForm();
   };
 
   const handleDelete = () => {
     if (!selectedMemo) return;
     deleteMemo(selectedMemo.id);
     setMemo("");
-    handleFormToggle();
+    closeForm();
   };
 
   const handleEdit = () => {
     if (selectedMemo.text === memo) return;
     editMemo(memo, selectedMemo.id);
     setMemo("");
-    handleFormToggle();
+    closeForm();
   };
 
   return (
@@ -68,7 +72,7 @@ const MemoForm = ({ addMemo, selectedMemo, deleteMemo, editMemo }) => {
               </>
             ) : (
               <>
-                <button type="button" onClick={handleFormToggle}>
+                <button type="button" onClick={closeForm}>
                   キャンセル
                 </button>
                 <button type="submit">作成</button>
@@ -77,7 +81,7 @@ const MemoForm = ({ addMemo, selectedMemo, deleteMemo, editMemo }) => {
           </div>
         </form>
       ) : (
-        <a href="#" onClick={handleFormToggle}>
+        <a href="#" onClick={openForm}>
           ＋
         </a>
       )}
