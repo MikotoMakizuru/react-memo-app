@@ -3,7 +3,9 @@ import MemoForm from "./MemoForm";
 import MemoList from "./MemoList";
 
 const App = () => {
-  const [memos, setMemos] = useState(JSON.parse(localStorage.getItem("memos")));
+  const [memos, setMemos] = useState(
+    JSON.parse(localStorage.getItem("memos")) || [],
+  );
   const [selectedMemo, setSelectedMemo] = useState(null);
 
   useEffect(() => {
