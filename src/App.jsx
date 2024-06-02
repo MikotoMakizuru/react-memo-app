@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 import MemoForm from "./MemoForm";
 import MemoList from "./MemoList";
 
@@ -13,23 +14,27 @@ const App = () => {
   }, [memos]);
 
   const addMemo = (memo) => {
-    setMemos([...memos, memo]);
+    const newMemo = { id: uuidv4(), text: memo };
+    setMemos([...memos, newMemo]);
   };
 
-  const selectMemo = (index) => {
-    setSelectedMemo({ memo: memos[index], index });
+  const selectMemo = (memo) => {
+    setSelectedMemo({ id: memo.id, text: memo.text });
   };
 
-  const deleteMemo = (index) => {
-    const updatedMemos = memos.filter((_, i) => i !== index);
+  const deleteMemo = (memoId) => {
+    const updatedMemos = memos.filter((memo) => memo.id !== memoId);
     setMemos(updatedMemos);
     setSelectedMemo(null);
   };
 
-  const editMemo = (updatedMemo, index) => {
-    const updatedMemos = memos.map((memo, i) =>
-      i === index ? updatedMemo : memo,
-    );
+  const editMemo = (updatedMemo, memoId) => {
+    const updatedMemos = memos.map((memo) => {
+      if (memo.id === memoId) {
+        memo.text = updatedMemo;
+      }
+      return memo;
+    });
     setMemos(updatedMemos);
     setSelectedMemo(null);
   };

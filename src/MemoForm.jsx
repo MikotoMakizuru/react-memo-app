@@ -7,7 +7,7 @@ const MemoForm = ({ addMemo, selectedMemo, deleteMemo, editMemo }) => {
 
   useEffect(() => {
     if (selectedMemo) {
-      setMemo(selectedMemo.memo);
+      setMemo(selectedMemo.text);
       setIsVisible(true);
       setIsEditing(true);
     }
@@ -29,15 +29,15 @@ const MemoForm = ({ addMemo, selectedMemo, deleteMemo, editMemo }) => {
 
   const handleDelete = () => {
     if (selectedMemo) {
-      deleteMemo(selectedMemo.index);
+      deleteMemo(selectedMemo.id);
       setMemo("");
       handleFormToggle();
     }
   };
 
   const handleEdit = () => {
-    if (selectedMemo.memo === memo) return;
-    editMemo(memo, selectedMemo.index);
+    if (selectedMemo.text === memo) return;
+    editMemo(memo, selectedMemo.id);
     setMemo("");
     handleFormToggle();
   };
