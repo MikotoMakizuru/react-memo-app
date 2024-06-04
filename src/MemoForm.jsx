@@ -1,26 +1,30 @@
 import React, { useState, useEffect } from "react";
 
-const MemoForm = ({ addMemo, selectedMemo, deleteMemo, editMemo }) => {
+const MemoForm = ({
+  addMemo,
+  selectedMemo,
+  deleteMemo,
+  editMemo,
+  setSelectedMemo,
+}) => {
   const [memo, setMemo] = useState("");
-  const [isVisible, setIsVisible] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    if (selectedMemo) {
-      setMemo(selectedMemo.text);
-      setIsVisible(true);
+    if (selectedMemo.memo && selectedMemo.isVisible) {
+      setMemo(selectedMemo.memo.text);
       setIsEditing(true);
     }
   }, [selectedMemo]);
 
   const openForm = () => {
-    setIsVisible(true);
+    setSelectedMemo({ isVisible: true });
     setMemo("");
     setIsEditing(false);
   };
 
   const closeForm = () => {
-    setIsVisible(false);
+    setSelectedMemo({ isVisible: false });
   };
 
   const handleSubmit = (e) => {
@@ -33,21 +37,21 @@ const MemoForm = ({ addMemo, selectedMemo, deleteMemo, editMemo }) => {
 
   const handleDelete = () => {
     if (!selectedMemo) return;
-    deleteMemo(selectedMemo.id);
+    deleteMemo(selectedMemo.memo.id);
     setMemo("");
     closeForm();
   };
 
   const handleEdit = () => {
-    if (selectedMemo.text === memo) return;
-    editMemo(memo, selectedMemo.id);
+    if (selectedMemo.memo.text === memo) return;
+    editMemo(memo, selectedMemo.memo.id);
     setMemo("");
     closeForm();
   };
 
   return (
     <div>
-      {isVisible ? (
+      {selectedMemo.isVisible ? (
         <form onSubmit={handleSubmit}>
           <div>
             <label>
