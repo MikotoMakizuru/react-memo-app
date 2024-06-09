@@ -53,15 +53,13 @@ const MemoForm = ({
       {selectedMemo !== null ? (
         <form onSubmit={handleSubmit}>
           <div>
-            <label>
-              メモ
-              <br />
-              <textarea
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                placeholder="メモを入力してください"
-              />
-            </label>
+            <label>メモ</label>
+            <br />
+            <textarea
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              placeholder="メモを入力してください"
+            />
           </div>
           <div>
             {isEditing ? (
