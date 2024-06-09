@@ -7,12 +7,12 @@ const MemoForm = ({
   editMemo,
   setSelectedMemo,
 }) => {
-  const [memo, setMemo] = useState("");
+  const [text, setText] = useState("");
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     if (selectedMemo) {
-      setMemo(selectedMemo.text);
+      setText(selectedMemo.text);
       setIsEditing(true);
     }
   }, [selectedMemo]);
@@ -23,28 +23,28 @@ const MemoForm = ({
 
   const closeForm = () => {
     setSelectedMemo(null);
-    setMemo("");
+    setText("");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (memo.trim() === "") return;
-    addMemo(memo);
-    setMemo("");
+    if (text.trim() === "") return;
+    addMemo(text);
+    setText("");
     closeForm();
   };
 
   const handleDelete = () => {
     if (!selectedMemo) return;
     deleteMemo(selectedMemo.id);
-    setMemo("");
+    setText("");
     closeForm();
   };
 
   const handleEdit = () => {
-    if (selectedMemo.text === memo) return;
-    editMemo(memo, selectedMemo.id);
-    setMemo("");
+    if (selectedMemo.text === text) return;
+    editMemo(text, selectedMemo.id);
+    setText("");
     closeForm();
   };
 
@@ -57,8 +57,8 @@ const MemoForm = ({
               メモ
               <br />
               <textarea
-                value={memo}
-                onChange={(e) => setMemo(e.target.value)}
+                value={text}
+                onChange={(e) => setText(e.target.value)}
                 placeholder="メモを入力してください"
               />
             </label>

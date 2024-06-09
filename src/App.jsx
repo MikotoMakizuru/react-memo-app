@@ -29,10 +29,10 @@ const App = () => {
     setSelectedMemo(null);
   };
 
-  const editMemo = (updatedMemo, memoId) => {
+  const editMemo = (updatedText, memoId) => {
     const updatedMemos = memos.map((memo) => {
       if (memo.id === memoId) {
-        memo.text = updatedMemo;
+        memo.text = updatedText;
       }
       return memo;
     });
