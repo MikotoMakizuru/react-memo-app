@@ -7,10 +7,8 @@ const App = () => {
   const [memos, setMemos] = useState(
     JSON.parse(localStorage.getItem("memos")) || [],
   );
-  const [selectedMemo, setSelectedMemo] = useState({
-    memo: null,
-    isVisible: false,
-  });
+
+  const [selectedMemo, setSelectedMemo] = useState(null);
 
   useEffect(() => {
     localStorage.setItem("memos", JSON.stringify(memos));
@@ -22,7 +20,7 @@ const App = () => {
   };
 
   const selectMemo = (memo) => {
-    setSelectedMemo({ memo, isVisible: true });
+    setSelectedMemo(memo);
   };
 
   const deleteMemo = (memoId) => {

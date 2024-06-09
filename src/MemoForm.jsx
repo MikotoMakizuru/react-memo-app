@@ -11,20 +11,19 @@ const MemoForm = ({
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    if (selectedMemo.memo && selectedMemo.isVisible) {
-      setMemo(selectedMemo.memo.text);
+    if (selectedMemo) {
+      setMemo(selectedMemo.text);
       setIsEditing(true);
     }
   }, [selectedMemo]);
 
   const openForm = () => {
-    setSelectedMemo({ isVisible: true });
-    setMemo("");
-    setIsEditing(false);
+    setSelectedMemo("");
   };
 
   const closeForm = () => {
-    setSelectedMemo({ isVisible: false });
+    setSelectedMemo(null);
+    setMemo("");
   };
 
   const handleSubmit = (e) => {
@@ -37,21 +36,21 @@ const MemoForm = ({
 
   const handleDelete = () => {
     if (!selectedMemo) return;
-    deleteMemo(selectedMemo.memo.id);
+    deleteMemo(selectedMemo.id);
     setMemo("");
     closeForm();
   };
 
   const handleEdit = () => {
-    if (selectedMemo.memo.text === memo) return;
-    editMemo(memo, selectedMemo.memo.id);
+    if (selectedMemo.text === memo) return;
+    editMemo(memo, selectedMemo.id);
     setMemo("");
     closeForm();
   };
 
   return (
     <div>
-      {selectedMemo.isVisible ? (
+      {selectedMemo !== null ? (
         <form onSubmit={handleSubmit}>
           <div>
             <label>
