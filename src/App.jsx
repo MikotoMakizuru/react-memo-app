@@ -7,7 +7,6 @@ const App = () => {
   const [memos, setMemos] = useState(
     JSON.parse(localStorage.getItem("memos")) || [],
   );
-
   const [selectedMemo, setSelectedMemo] = useState(null);
 
   useEffect(() => {

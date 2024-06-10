@@ -8,12 +8,10 @@ const MemoForm = ({
   setSelectedMemo,
 }) => {
   const [text, setText] = useState("");
-  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     if (selectedMemo) {
       setText(selectedMemo.text);
-      setIsEditing(true);
     }
   }, [selectedMemo]);
 
@@ -62,7 +60,7 @@ const MemoForm = ({
             />
           </div>
           <div>
-            {isEditing ? (
+            {selectedMemo !== "" ? (
               <>
                 <button type="button" onClick={handleEdit}>
                   編集
