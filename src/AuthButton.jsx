@@ -1,7 +1,7 @@
 import React from "react";
 import { useAuth } from "./AuthContext";
 
-const Auth = () => {
+const AuthButton = () => {
   const { auth } = useAuth();
 
   return (
@@ -11,4 +11,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default AuthButton;

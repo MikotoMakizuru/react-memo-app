@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { AuthProvider } from "./AuthContext";
 import MemoForm from "./MemoForm";
 import MemoList from "./MemoList";
-import Auth from "./Auth";
+import AuthButton from "./AuthButton";
 
 const App = () => {
   const [memos, setMemos] = useState(
@@ -46,7 +46,7 @@ const App = () => {
       <div>
         <header>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <Auth />
+            <AuthButton />
           </div>
         </header>
         <MemoList memos={memos} selectMemo={selectMemo} />
