@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from "./AuthContext";
 
 const MemoForm = ({
   addMemo,
@@ -8,12 +9,19 @@ const MemoForm = ({
   setSelectedMemo,
 }) => {
   const [text, setText] = useState("");
+  const { auth } = useAuth();
 
   useEffect(() => {
     if (selectedMemo) {
       setText(selectedMemo.text);
     }
   }, [selectedMemo]);
+
+  useEffect(() => {
+    if (!auth.isLogin) {
+      closeForm();
+    }
+  }, [auth.isLogin]);
 
   const openForm = () => {
     setSelectedMemo("");
@@ -61,14 +69,16 @@ const MemoForm = ({
           </div>
           <div>
             {selectedMemo !== "" ? (
-              <>
-                <button type="button" onClick={handleEdit}>
-                  編集
-                </button>
-                <button type="button" onClick={handleDelete}>
-                  削除
-                </button>
-              </>
+              auth.isLogin && (
+                <>
+                  <button type="button" onClick={handleEdit}>
+                    編集
+                  </button>
+                  <button type="button" onClick={handleDelete}>
+                    削除
+                  </button>
+                </>
+              )
             ) : (
               <>
                 <button type="button" onClick={closeForm}>
@@ -80,9 +90,11 @@ const MemoForm = ({
           </div>
         </form>
       ) : (
-        <a href="#" onClick={openForm}>
-          ＋
-        </a>
+        auth.isLogin && (
+          <a href="#" onClick={openForm}>
+            ＋
+          </a>
+        )
       )}
     </div>
   );

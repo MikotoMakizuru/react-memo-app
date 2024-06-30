@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { AuthProvider } from "./AuthContext";
 import MemoForm from "./MemoForm";
 import MemoList from "./MemoList";
+import AuthButton from "./AuthButton";
 
 const App = () => {
   const [memos, setMemos] = useState(
@@ -40,18 +42,23 @@ const App = () => {
   };
 
   return (
-    <div>
-      <header>
+    <AuthProvider>
+      <div>
+        <header>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <AuthButton />
+          </div>
+        </header>
         <MemoList memos={memos} selectMemo={selectMemo} />
-      </header>
-      <MemoForm
-        addMemo={addMemo}
-        selectedMemo={selectedMemo}
-        deleteMemo={deleteMemo}
-        editMemo={editMemo}
-        setSelectedMemo={setSelectedMemo}
-      />
-    </div>
+        <MemoForm
+          addMemo={addMemo}
+          selectedMemo={selectedMemo}
+          deleteMemo={deleteMemo}
+          editMemo={editMemo}
+          setSelectedMemo={setSelectedMemo}
+        />
+      </div>
+    </AuthProvider>
   );
 };
 
